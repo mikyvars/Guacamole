@@ -12,8 +12,9 @@ public class CustomLogger {
     }
 
     public void logDebug(String logging) {
-        logger.debug("\u001B[34m" + logging + "\u001B[0m");
+        logger.info("\u001B[34m" + logging + "\u001B[0m");
     }
+
     public void logInfo(String logging) {
         logger.info("\u001B[32m" + logging + "\u001B[0m");
     }
