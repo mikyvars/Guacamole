@@ -53,7 +53,6 @@
                         <includes>
                             <include>io.github.miniplaceholders:miniplaceholders-api</include>
                             <include>com.github.odalita-developments.odalitamenus:core</include>
-                            <include>fr.mrmicky:fastboard</include>
                         </includes>
                     </artifactSet>
                 </configuration>
@@ -104,11 +103,6 @@
             <groupId>com.github.odalita-developments.odalitamenus</groupId>
             <artifactId>core</artifactId>
             <version>0.4.4</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.mrmicky</groupId>
-            <artifactId>fastboard</artifactId>
-            <version>2.0.2</version>
         </dependency>
     </dependencies>
 </project>
