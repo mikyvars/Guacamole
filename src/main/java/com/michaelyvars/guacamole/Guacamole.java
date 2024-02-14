@@ -1,6 +1,7 @@
 package com.michaelyvars.guacamole;
 
 import com.michaelyvars.guacamole.utils.CustomLogger;
+import com.michaelyvars.guacamole.world.WorldManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -8,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Guacamole extends JavaPlugin {
 
     private CustomLogger customLogger;
+    private WorldManager worldManager;
 
     @Override
     public void onEnable() {
@@ -21,6 +23,8 @@ public final class Guacamole extends JavaPlugin {
             getCustomLogger().logInfo("| | \\_  )| |   | || (   ) || |      | (   ) || |   | || |   | || |      | (          ");
             getCustomLogger().logInfo("| (___) || (___) || )   ( || (____/\\| )   ( || )   ( || (___) || (____/\\| (____/\\  ");
             getCustomLogger().logInfo("(_______)(_______)|/     \\|(_______/|/     \\||/     \\|(_______)(_______/(_______/  ");
+
+            this.worldManager = new WorldManager(this);
         } catch (RuntimeException e) {
             getCustomLogger().logError(e.getMessage());
             getServer().shutdown();
