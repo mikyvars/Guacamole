@@ -4,6 +4,9 @@ import com.michaelyvars.guacamole.game.GameManager;
 import com.michaelyvars.guacamole.utils.CustomLogger;
 import com.michaelyvars.guacamole.world.WorldManager;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
@@ -37,5 +40,10 @@ public final class Guacamole extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public Component prefix(Component prefix) {
+        return MiniMessage.miniMessage().deserialize("<white>「<prefix>」</white>",
+                Placeholder.component("prefix", prefix));
     }
 }
