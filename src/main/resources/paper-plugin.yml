@@ -1,5 +1,7 @@
 name: Guacamole
 version: '${project.version}'
+author: mikyvars
+description: Automated "The Mole" game adapted to play with my friends.
 main: com.michaelyvars.guacamole.Guacamole
 api-version: '1.20'
-load: STARTUP
+load: POSTWORLD
