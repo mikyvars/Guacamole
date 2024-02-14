@@ -1,5 +1,6 @@
 package com.michaelyvars.guacamole;
 
+import com.michaelyvars.guacamole.game.GameManager;
 import com.michaelyvars.guacamole.utils.CustomLogger;
 import com.michaelyvars.guacamole.world.WorldManager;
 import lombok.Getter;
@@ -10,6 +11,7 @@ public final class Guacamole extends JavaPlugin {
 
     private CustomLogger customLogger;
     private WorldManager worldManager;
+    private GameManager gameManager;
 
     @Override
     public void onEnable() {
@@ -25,6 +27,7 @@ public final class Guacamole extends JavaPlugin {
             getCustomLogger().logInfo("(_______)(_______)|/     \\|(_______/|/     \\||/     \\|(_______)(_______/(_______/  ");
 
             this.worldManager = new WorldManager(this);
+            this.gameManager = new GameManager(this);
         } catch (RuntimeException e) {
             getCustomLogger().logError(e.getMessage());
             getServer().shutdown();
