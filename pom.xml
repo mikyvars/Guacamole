@@ -53,6 +53,7 @@
                         <includes>
                             <include>io.github.miniplaceholders:miniplaceholders-api</include>
                             <include>com.github.odalita-developments.odalitamenus:core</include>
+                            <include>me.mattstudios.utils:matt-framework</include>
                         </includes>
                     </artifactSet>
                 </configuration>
@@ -103,6 +104,11 @@
             <groupId>com.github.odalita-developments.odalitamenus</groupId>
             <artifactId>core</artifactId>
             <version>0.4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>me.mattstudios.utils</groupId>
+            <artifactId>matt-framework</artifactId>
+            <version>1.4.6</version>
         </dependency>
     </dependencies>
 </project>

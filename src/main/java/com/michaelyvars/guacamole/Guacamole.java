@@ -1,5 +1,6 @@
 package com.michaelyvars.guacamole;
 
+import com.michaelyvars.guacamole.commands.CommandTeamName;
 import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
 import com.michaelyvars.guacamole.data.expansions.ExpansionPlayer;
 import com.michaelyvars.guacamole.events.EventAsyncChat;
@@ -14,6 +15,7 @@ import com.michaelyvars.guacamole.team.TeamManager;
 import com.michaelyvars.guacamole.utils.CustomLogger;
 import com.michaelyvars.guacamole.world.WorldManager;
 import lombok.Getter;
+import me.mattstudios.mf.base.CommandManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -66,6 +68,13 @@ public final class Guacamole extends JavaPlugin {
             pluginManager.registerEvents(new EventFoodLevelChange(this), this);
             pluginManager.registerEvents(new EventInventoryClick(this), this);
             pluginManager.registerEvents(new EventServerListPing(), this);
+
+            CommandManager commandManager = new CommandManager(this);
+            commandManager.register(new CommandTeamName(this));
+            commandManager.getMessageHandler().register("cmd.no.permission", sender -> sender.sendMessage("§cTu n'as pas la permission d'utiliser cette commande."));
+            commandManager.getMessageHandler().register("cmd.no.console", sender -> sender.sendMessage("§cTu ne peux pas utiliser cette commande depuis la console."));
+            commandManager.getMessageHandler().register("cmd.no.exists", sender -> sender.sendMessage("§cCette commande n'existe pas."));
+            commandManager.getMessageHandler().register("cmd.wrong.usage", sender -> {});
         } catch (RuntimeException e) {
             getCustomLogger().logError(e.getMessage());
             getServer().shutdown();

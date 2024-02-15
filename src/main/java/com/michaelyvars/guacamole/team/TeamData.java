@@ -25,9 +25,13 @@ public class TeamData {
 
     public TeamData(String name, NamedTextColor color, Material icon) {
         this.uniqueId = UUID.randomUUID();
-        this.name = Component.text(name, color);
+        this.name = Component.text(name);
         this.color = color;
         this.icon = icon;
         this.players = new ArrayList<>();
+    }
+
+    public Component getName() {
+        return name.color(color);
     }
 }
