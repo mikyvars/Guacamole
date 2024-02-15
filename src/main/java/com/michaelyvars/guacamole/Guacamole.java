@@ -3,10 +3,10 @@ package com.michaelyvars.guacamole;
 import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
 import com.michaelyvars.guacamole.data.expansions.ExpansionPlayer;
 import com.michaelyvars.guacamole.events.EventAsyncChat;
-import com.michaelyvars.guacamole.events.player.EventPlayerDropItem;
-import com.michaelyvars.guacamole.events.player.EventPlayerInteract;
-import com.michaelyvars.guacamole.events.player.EventPlayerJoin;
-import com.michaelyvars.guacamole.events.player.EventPlayerQuit;
+import com.michaelyvars.guacamole.events.EventFoodLevelChange;
+import com.michaelyvars.guacamole.events.EventInventoryClick;
+import com.michaelyvars.guacamole.events.EventServerListPing;
+import com.michaelyvars.guacamole.events.player.*;
 import com.michaelyvars.guacamole.game.GameManager;
 import com.michaelyvars.guacamole.player.PlayerManager;
 import com.michaelyvars.guacamole.scoreboard.ScoreboardManager;
@@ -57,11 +57,15 @@ public final class Guacamole extends JavaPlugin {
             new ExpansionPlayer(this).get().register();
 
             PluginManager pluginManager = getServer().getPluginManager();
+            pluginManager.registerEvents(new EventPlayerAdvancementDone(), this);
             pluginManager.registerEvents(new EventPlayerDropItem(this), this);
             pluginManager.registerEvents(new EventPlayerInteract(this), this);
             pluginManager.registerEvents(new EventPlayerJoin(this), this);
             pluginManager.registerEvents(new EventPlayerQuit(this), this);
             pluginManager.registerEvents(new EventAsyncChat(this), this);
+            pluginManager.registerEvents(new EventFoodLevelChange(this), this);
+            pluginManager.registerEvents(new EventInventoryClick(this), this);
+            pluginManager.registerEvents(new EventServerListPing(), this);
         } catch (RuntimeException e) {
             getCustomLogger().logError(e.getMessage());
             getServer().shutdown();

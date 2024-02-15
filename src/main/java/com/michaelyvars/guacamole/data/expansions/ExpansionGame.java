@@ -11,6 +11,8 @@ public record ExpansionGame(Guacamole plugin) {
 
     public Expansion get() {
         Expansion.Builder builder = Expansion.builder("game");
+        builder.globalPlaceholder("name", (argumentQueue, context) -> Tag.inserting(Component.text("change-me")));
+        builder.globalPlaceholder("state", (argumentQueue, context) -> Tag.inserting(plugin.getGameManager().getGameState().getName()));
 
         builder.globalPlaceholder("prefix", (argumentQueue, context) -> {
             if (argumentQueue.hasNext()) {
