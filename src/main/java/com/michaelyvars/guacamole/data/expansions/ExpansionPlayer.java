@@ -5,6 +5,8 @@ import com.michaelyvars.guacamole.player.PlayerData;
 import io.github.miniplaceholders.api.Expansion;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.identity.Identity;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import org.bukkit.entity.Player;
 
@@ -16,7 +18,20 @@ public record ExpansionPlayer(Guacamole plugin) {
 
         builder.audiencePlaceholder("name", (audience, argumentQueue, context) -> {
             PlayerData playerData = playerData(audience);
-            return Tag.inserting(playerData.getName());
+
+            if(playerData.getTeam() == null)
+                return Tag.inserting(playerData.getName());
+            else
+                return Tag.inserting(playerData.getName().color(playerData.getTeam().getColor()));
+        });
+
+        builder.audiencePlaceholder("team", (audience, argumentQueue, context) -> {
+            PlayerData playerData = playerData(audience);
+
+            if (playerData.getTeam() == null)
+                return Tag.inserting(Component.text("Aucune", NamedTextColor.WHITE));
+            else
+                return Tag.inserting(playerData.getTeam().getName());
         });
 
         return builder.build();

@@ -33,6 +33,24 @@ public record ExpansionGame(Guacamole plugin) {
             }
         });
 
+        builder.globalPlaceholder("count", (argumentQueue, context) -> {
+            if(argumentQueue.hasNext()) {
+                switch (argumentQueue.pop().value()) {
+                    case "players" -> {
+                        return Tag.inserting(Component.text(plugin.getPlayerManager().getAlivePlayers().size()));
+                    }
+                    case "teams" -> {
+                        return Tag.inserting(Component.text(plugin.getTeamManager().getAliveTeams().size()));
+                    }
+                    default -> {
+                        return TagsUtils.EMPTY_TAG;
+                    }
+                }
+            } else {
+                return TagsUtils.EMPTY_TAG;
+            }
+        });
+
         return builder.build();
     }
 }
