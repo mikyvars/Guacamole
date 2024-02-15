@@ -37,12 +37,12 @@ public class PlayerManager implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = players.get(player.getUniqueId());
 
-        if(playerData == null) {
+        if (playerData == null) {
             playerData = new PlayerData(player.getUniqueId(), player.name());
             players.put(player.getUniqueId(), playerData);
         }
 
-        if(plugin.getGameManager().getGameState() == GameState.WAITING) {
+        if (plugin.getGameManager().getGameState() == GameState.WAITING) {
 
             player.setHealth(20);
             player.setFoodLevel(20);
@@ -51,7 +51,11 @@ public class PlayerManager implements Listener {
 
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
-            player.teleport(plugin.getWorldManager().getLobby().getSpawnLocation().add(0.5, 0.5, 0.5));
+
+            if (plugin.getWorldManager().getLobby() == null)
+                return;
+            else
+                player.teleport(plugin.getWorldManager().getLobby().getSpawnLocation().add(0.5, 0.5, 0.5));
 
             event.joinMessage(MiniMessage.miniMessage().deserialize("<game_prefix><gold><player_name> <white>a rejoint la partie.",
                     MiniPlaceholders.getGlobalPlaceholders(),
@@ -70,12 +74,12 @@ public class PlayerManager implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = players.get(player.getUniqueId());
 
-        if(playerData == null) {
+        if (playerData == null) {
             plugin.getCustomLogger().logDebug("PlayerData of [" + player.getName() + "] was null at disconnection.");
             return;
         }
 
-        if(plugin.getGameManager().getGameState() == GameState.WAITING) {
+        if (plugin.getGameManager().getGameState() == GameState.WAITING) {
             event.quitMessage(MiniMessage.miniMessage().deserialize("<game_prefix><gold><player_name> <white>a quitté la partie.",
                     MiniPlaceholders.getGlobalPlaceholders(),
                     MiniPlaceholders.getAudiencePlaceholders(player)));
