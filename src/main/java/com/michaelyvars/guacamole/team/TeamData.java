@@ -2,10 +2,8 @@ package com.michaelyvars.guacamole.team;
 
 import com.michaelyvars.guacamole.player.PlayerData;
 import lombok.Data;
-import lombok.ToString;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 

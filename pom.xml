@@ -54,6 +54,7 @@
                             <include>io.github.miniplaceholders:miniplaceholders-api</include>
                             <include>com.github.odalita-developments.odalitamenus:core</include>
                             <include>me.mattstudios.utils:matt-framework</include>
+                            <include>com.github.simplix-softworks:simplixstorage</include>
                         </includes>
                     </artifactSet>
                 </configuration>
@@ -109,6 +110,11 @@
             <groupId>me.mattstudios.utils</groupId>
             <artifactId>matt-framework</artifactId>
             <version>1.4.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.simplix-softworks</groupId>
+            <artifactId>simplixstorage</artifactId>
+            <version>3.2.7</version>
         </dependency>
     </dependencies>
 </project>

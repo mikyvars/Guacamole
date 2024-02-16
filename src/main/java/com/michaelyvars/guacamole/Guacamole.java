@@ -1,6 +1,7 @@
 package com.michaelyvars.guacamole;
 
 import com.michaelyvars.guacamole.commands.CommandTeamName;
+import com.michaelyvars.guacamole.configuration.Configuration;
 import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
 import com.michaelyvars.guacamole.data.expansions.ExpansionPlayer;
 import com.michaelyvars.guacamole.events.EventAsyncChat;
@@ -28,6 +29,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Guacamole extends JavaPlugin {
 
     private CustomLogger customLogger;
+    private Configuration configuration;
     private WorldManager worldManager;
     private GameManager gameManager;
     private PlayerManager playerManager;
@@ -48,6 +50,7 @@ public final class Guacamole extends JavaPlugin {
             getCustomLogger().logInfo("| (___) || (___) || )   ( || (____/\\| )   ( || )   ( || (___) || (____/\\| (____/\\  ");
             getCustomLogger().logInfo("(_______)(_______)|/     \\|(_______/|/     \\||/     \\|(_______)(_______/(_______/  ");
 
+            this.configuration = new Configuration(this, getDataFolder().getPath());
             this.worldManager = new WorldManager(this);
             this.gameManager = new GameManager(this);
             this.playerManager = new PlayerManager(this);
