@@ -5,6 +5,8 @@ import com.michaelyvars.guacamole.configuration.Configuration;
 import com.michaelyvars.guacamole.data.GameState;
 import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
 import com.michaelyvars.guacamole.data.expansions.ExpansionPlayer;
+import com.michaelyvars.guacamole.data.threads.GamePreStartThread;
+import com.michaelyvars.guacamole.data.threads.GameThread;
 import com.michaelyvars.guacamole.events.EventAsyncChat;
 import com.michaelyvars.guacamole.events.EventFoodLevelChange;
 import com.michaelyvars.guacamole.events.EventInventoryClick;
@@ -16,6 +18,7 @@ import com.michaelyvars.guacamole.managers.TeamManager;
 import com.michaelyvars.guacamole.managers.WorldManager;
 import com.michaelyvars.guacamole.utils.CustomLogger;
 import lombok.Getter;
+import lombok.Setter;
 import me.mattstudios.mf.base.CommandManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -30,17 +33,20 @@ public final class Guacamole extends JavaPlugin {
 
     private CustomLogger customLogger;
     private Configuration configuration;
-    private GameState gameState;
     private WorldManager worldManager;
     private PlayerManager playerManager;
     private TeamManager teamManager;
     private ScoreboardManager scoreboardManager;
     private OdalitaMenus odalitaMenus;
+    @Setter private GameState gameState = GameState.WAITING;
+    @Setter private GamePreStartThread gamePreStartThread;
+    @Setter private GameThread gameThread;
 
     @Override
     public void onEnable() {
         try {
             this.customLogger = new CustomLogger("Guacamole");
+
             getCustomLogger().logInfo(" _______           _______  _______  _______  _______  _______  _        _______      ");
             getCustomLogger().logInfo("(  ____ \\|\\     /|(  ___  )(  ____ \\(  ___  )(       )(  ___  )( \\      (  ____ \\");
             getCustomLogger().logInfo("| (    \\/| )   ( || (   ) || (    \\/| (   ) || () () || (   ) || (      | (    \\/  ");
@@ -51,12 +57,13 @@ public final class Guacamole extends JavaPlugin {
             getCustomLogger().logInfo("(_______)(_______)|/     \\|(_______/|/     \\||/     \\|(_______)(_______/(_______/  ");
 
             this.configuration = new Configuration(this, getDataFolder().getPath());
-            this.gameState = GameState.WAITING;
             this.worldManager = new WorldManager(this);
             this.playerManager = new PlayerManager(this);
             this.teamManager = new TeamManager(this);
             this.scoreboardManager = new ScoreboardManager(this);
             this.odalitaMenus = OdalitaMenus.createInstance(this);
+            this.gamePreStartThread = new GamePreStartThread(this);
+            this.gameThread = new GameThread(this);
 
             new ExpansionGame(this).get().register();
             new ExpansionPlayer(this).get().register();

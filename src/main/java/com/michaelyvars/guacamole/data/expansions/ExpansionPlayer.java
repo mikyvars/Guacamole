@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public record ExpansionPlayer(Guacamole plugin) {
 
     public Expansion get() {
-        Expansion.Builder builder = Expansion.builder("managers");
+        Expansion.Builder builder = Expansion.builder("player");
         builder.filter(Player.class);
 
         builder.audiencePlaceholder("name", (audience, argumentQueue, context) -> {

@@ -2,6 +2,7 @@ package com.michaelyvars.guacamole.data.expansions;
 
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.configuration.Configuration;
+import com.michaelyvars.guacamole.utils.TimeUtils;
 import io.github.miniplaceholders.api.Expansion;
 import io.github.miniplaceholders.api.utils.TagsUtils;
 import net.kyori.adventure.text.Component;
@@ -33,6 +34,24 @@ public record ExpansionGame(Guacamole plugin) {
                 }
             } else {
                 return Tag.inserting(plugin.prefix(Component.text("Guacamole", NamedTextColor.DARK_GREEN)));
+            }
+        });
+
+        builder.globalPlaceholder("time", (argumentQueue, context) -> {
+            if (argumentQueue.hasNext()) {
+                switch (argumentQueue.pop().value()) {
+                    case "episode" -> {
+                        return Tag.inserting(Component.text(plugin.getGameThread().getEpisode()));
+                    }
+                    case "starting" -> {
+                        return Tag.inserting(Component.text(plugin.getGamePreStartThread().getTimer()));
+                    }
+                    default -> {
+                        return TagsUtils.EMPTY_TAG;
+                    }
+                }
+            } else {
+                return Tag.inserting(Component.text(TimeUtils.getFormattedTime(plugin.getGameThread().getTime())));
             }
         });
 

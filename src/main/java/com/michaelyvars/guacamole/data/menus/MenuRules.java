@@ -3,6 +3,7 @@ package com.michaelyvars.guacamole.data.menus;
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.configuration.Configuration;
 import com.michaelyvars.guacamole.utils.CustomItem;
+import com.michaelyvars.guacamole.utils.TimeUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -38,11 +39,11 @@ public class MenuRules implements GlobalMenuProvider {
         Configuration configuration = plugin.getConfiguration();
         menuContents.fill(DisplayItem.of(new CustomItem(Material.GREEN_STAINED_GLASS_PANE).withName(Component.empty()).build()));
         menuContents.set(11, DisplayItem.of(new CustomItem(Material.CLOCK).withName(plugin.prefix(Component.text("Timers", NamedTextColor.AQUA))).withLore(List.of(
-                miniMessage().deserialize("│ <green>Épisode <dark_gray>» <yellow><value>", Placeholder.parsed("value", getFormattedTime(configuration.get(Configuration.TIMER_EPISODE)))),
-                miniMessage().deserialize("│ <green>Invincibilité <dark_gray>» <yellow><value>", Placeholder.parsed("value", getFormattedTime(configuration.get(Configuration.TIMER_INVINCIBILITY)))),
-                miniMessage().deserialize("│ <green>PVP <dark_gray>» <yellow><value>", Placeholder.parsed("value", getFormattedTime(configuration.get(Configuration.TIMER_PVP)))),
-                miniMessage().deserialize("│ <green>Taupes <dark_gray>» <yellow><value>", Placeholder.parsed("value", getFormattedTime(configuration.get(Configuration.TIMER_MOLES)))),
-                miniMessage().deserialize("│ <green>Bordure <dark_gray>» <yellow><value>", Placeholder.parsed("value", getFormattedTime(configuration.get(Configuration.TIMER_BORDER))))
+                miniMessage().deserialize("│ <green>Épisode <dark_gray>» <yellow><value>", Placeholder.parsed("value", TimeUtils.getFormattedTime(configuration.get(Configuration.TIMER_EPISODE)))),
+                miniMessage().deserialize("│ <green>Invincibilité <dark_gray>» <yellow><value>", Placeholder.parsed("value", TimeUtils.getFormattedTime(configuration.get(Configuration.TIMER_INVINCIBILITY)))),
+                miniMessage().deserialize("│ <green>PVP <dark_gray>» <yellow><value>", Placeholder.parsed("value", TimeUtils.getFormattedTime(configuration.get(Configuration.TIMER_PVP)))),
+                miniMessage().deserialize("│ <green>Taupes <dark_gray>» <yellow><value>", Placeholder.parsed("value", TimeUtils.getFormattedTime(configuration.get(Configuration.TIMER_MOLES)))),
+                miniMessage().deserialize("│ <green>Bordure <dark_gray>» <yellow><value>", Placeholder.parsed("value", TimeUtils.getFormattedTime(configuration.get(Configuration.TIMER_BORDER))))
         )).build()));
         menuContents.set(12, DisplayItem.of(new CustomItem(Material.BARRIER).withName(plugin.prefix(Component.text("Bordure", NamedTextColor.AQUA))).withLore(List.of(
                 miniMessage().deserialize("│ <green>Début <dark_gray>» <yellow>+<value>/-<value>", Placeholder.parsed("value", String.valueOf(configuration.get(Configuration.BORDER_START)))),
@@ -61,17 +62,5 @@ public class MenuRules implements GlobalMenuProvider {
                 miniMessage().deserialize("│ <green>Silex <dark_gray>» <yellow><value>%", Placeholder.parsed("value", String.valueOf(configuration.get(Configuration.RATE_FLINT)))),
                 miniMessage().deserialize("│ <green>Perles de l'ender <dark_gray>» <yellow><value>%", Placeholder.parsed("value", String.valueOf(configuration.get(Configuration.RATE_ENDER_PEARL))))
         )).build()));
-    }
-
-    private String getFormattedTime(int time) {
-        SimpleDateFormat simpleDateFormat;
-
-        if (time >= 3600)
-            simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        else
-            simpleDateFormat = new SimpleDateFormat("mm:ss");
-
-        Date date = new Date(time * 1000L);
-        return simpleDateFormat.format(date);
     }
 }
