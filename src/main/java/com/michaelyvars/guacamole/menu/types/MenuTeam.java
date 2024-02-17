@@ -1,4 +1,4 @@
-package com.michaelyvars.guacamole.menus.types;
+package com.michaelyvars.guacamole.menu.types;
 
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.player.PlayerData;
@@ -13,7 +13,6 @@ import nl.odalitadevelopments.menus.annotations.Menu;
 import nl.odalitadevelopments.menus.contents.MenuContents;
 import nl.odalitadevelopments.menus.items.DisplayItem;
 import nl.odalitadevelopments.menus.items.UpdatableItem;
-import nl.odalitadevelopments.menus.items.buttons.CloseItem;
 import nl.odalitadevelopments.menus.menu.providers.PlayerMenuProvider;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

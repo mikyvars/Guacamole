@@ -1,8 +1,9 @@
 package com.michaelyvars.guacamole.events.player;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.data.menus.MenuTeam;
 import com.michaelyvars.guacamole.game.GameState;
+import com.michaelyvars.guacamole.menu.types.MenuRules;
+import com.michaelyvars.guacamole.menu.types.MenuTeam;
 import com.michaelyvars.guacamole.player.PlayerData;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -41,6 +42,7 @@ public class EventPlayerJoin implements Listener {
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
             player.getInventory().setItem(3, MenuTeam.getItem());
+            player.getInventory().setItem(5, MenuRules.getItem());
 
             if (plugin.getWorldManager().getLobby() == null)
                 return;

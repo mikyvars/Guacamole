@@ -3,6 +3,7 @@ package com.michaelyvars.guacamole.utils;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,8 +41,10 @@ public class CustomItem implements Listener {
     }
 
     public CustomItem withLore(List<Component> loreList) {
+        List<Component> result = new ArrayList<>();
+        loreList.forEach(component -> result.add(component.color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)));
         ItemMeta meta = item.getItemMeta();
-        meta.lore(loreList);
+        meta.lore(result);
         item.setItemMeta(meta);
         return this;
     }

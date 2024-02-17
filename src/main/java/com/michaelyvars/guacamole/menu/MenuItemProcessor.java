@@ -1,4 +1,4 @@
-package com.michaelyvars.guacamole.menus;
+package com.michaelyvars.guacamole.menu;
 
 import com.michaelyvars.guacamole.utils.CustomItem;
 import net.kyori.adventure.text.Component;
