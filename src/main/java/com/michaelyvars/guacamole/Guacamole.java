@@ -10,6 +10,7 @@ import com.michaelyvars.guacamole.events.EventInventoryClick;
 import com.michaelyvars.guacamole.events.EventServerListPing;
 import com.michaelyvars.guacamole.events.player.*;
 import com.michaelyvars.guacamole.game.GameManager;
+import com.michaelyvars.guacamole.menus.MenuItemProcessor;
 import com.michaelyvars.guacamole.player.PlayerManager;
 import com.michaelyvars.guacamole.scoreboard.ScoreboardManager;
 import com.michaelyvars.guacamole.team.TeamManager;
@@ -21,6 +22,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import nl.odalitadevelopments.menus.OdalitaMenus;
+import nl.odalitadevelopments.menus.providers.providers.DefaultItemProvider;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -57,6 +59,7 @@ public final class Guacamole extends JavaPlugin {
             this.teamManager = new TeamManager(this);
             this.scoreboardManager = new ScoreboardManager(this);
             this.odalitaMenus = OdalitaMenus.createInstance(this);
+            this.odalitaMenus.getProvidersContainer().setDefaultItemProvider(new MenuItemProcessor());
 
             new ExpansionGame(this).get().register();
             new ExpansionPlayer(this).get().register();

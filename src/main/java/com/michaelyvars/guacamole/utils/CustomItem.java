@@ -1,5 +1,7 @@
 package com.michaelyvars.guacamole.utils;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+import com.destroystokyo.paper.profile.ProfileProperty;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -20,24 +22,18 @@ public class CustomItem implements Listener {
 
     private final ItemStack item;
 
-    public CustomItem(Material material, int amount) {
-        this.item = new ItemStack(material, amount);
+    public CustomItem(Material material) {
+        this.item = new ItemStack(material);
     }
 
-    public CustomItem(Material material) {
-        this(material, 1);
+    public CustomItem withAmount(int amount) {
+        item.setAmount(amount);
+        return this;
     }
 
     public CustomItem withName(Component name) {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(name.decoration(TextDecoration.ITALIC, false));
-        item.setItemMeta(meta);
-        return this;
-    }
-
-    public CustomItem withLore(Component lore) {
-        ItemMeta meta = item.getItemMeta();
-        meta.lore(List.of(lore));
         item.setItemMeta(meta);
         return this;
     }
@@ -66,6 +62,15 @@ public class CustomItem implements Listener {
     public CustomItem withSkullOwner(UUID uuid) {
         SkullMeta meta = (SkullMeta) item.getItemMeta();
         meta.setOwningPlayer(Bukkit.getOfflinePlayer(uuid));
+        item.setItemMeta(meta);
+        return this;
+    }
+
+    public CustomItem withSkullModel(String model) {
+        PlayerProfile playerProfile = Bukkit.createProfile(UUID.randomUUID());
+        playerProfile.getProperties().add(new ProfileProperty("textures", model));
+        SkullMeta meta = (SkullMeta) item.getItemMeta();
+        meta.setPlayerProfile(playerProfile);
         item.setItemMeta(meta);
         return this;
     }
