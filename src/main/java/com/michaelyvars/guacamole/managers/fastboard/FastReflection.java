@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.michaelyvars.guacamole.scoreboard.fastboard;
+package com.michaelyvars.guacamole.managers.fastboard;
 
 import org.bukkit.Bukkit;
 

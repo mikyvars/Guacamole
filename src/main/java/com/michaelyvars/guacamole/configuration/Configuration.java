@@ -44,10 +44,6 @@ public class Configuration {
         return option.getValue(configurationFile);
     }
 
-    public <T> void set(Option<T> option, T value) {
-        option.setValue(configurationFile, value);
-    }
-
     private List<Option<?>> getOptions() {
         List<Option<?>> options = new ArrayList<>();
 

@@ -1,4 +1,4 @@
-package com.michaelyvars.guacamole.world;
+package com.michaelyvars.guacamole.managers;
 
 import com.michaelyvars.guacamole.Guacamole;
 import lombok.Getter;

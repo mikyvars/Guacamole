@@ -1,6 +1,7 @@
 package com.michaelyvars.guacamole.data.expansions;
 
 import com.michaelyvars.guacamole.Guacamole;
+import com.michaelyvars.guacamole.configuration.Configuration;
 import io.github.miniplaceholders.api.Expansion;
 import io.github.miniplaceholders.api.utils.TagsUtils;
 import net.kyori.adventure.text.Component;
@@ -11,8 +12,8 @@ public record ExpansionGame(Guacamole plugin) {
 
     public Expansion get() {
         Expansion.Builder builder = Expansion.builder("game");
-        builder.globalPlaceholder("name", (argumentQueue, context) -> Tag.inserting(Component.text("change-me")));
-        builder.globalPlaceholder("state", (argumentQueue, context) -> Tag.inserting(plugin.getGameManager().getGameState().getName()));
+        builder.globalPlaceholder("name", (argumentQueue, context) -> Tag.inserting(Component.text(plugin.getConfiguration().get(Configuration.GAME_NAME))));
+        builder.globalPlaceholder("state", (argumentQueue, context) -> Tag.inserting(plugin.getGameState().getName()));
 
         builder.globalPlaceholder("prefix", (argumentQueue, context) -> {
             if (argumentQueue.hasNext()) {

@@ -1,8 +1,8 @@
-package com.michaelyvars.guacamole.menu.types;
+package com.michaelyvars.guacamole.data.menus;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.player.PlayerData;
-import com.michaelyvars.guacamole.team.TeamData;
+import com.michaelyvars.guacamole.data.PlayerData;
+import com.michaelyvars.guacamole.data.TeamData;
 import com.michaelyvars.guacamole.utils.CustomItem;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.Component;

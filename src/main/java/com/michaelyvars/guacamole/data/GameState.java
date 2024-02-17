@@ -1,8 +1,10 @@
-package com.michaelyvars.guacamole.game;
+package com.michaelyvars.guacamole.data;
 
+import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
+@Getter
 public enum GameState {
     WAITING(Component.text("En attente des joueurs", NamedTextColor.GREEN), new Component[]{
             Component.empty(),
@@ -67,13 +69,5 @@ public enum GameState {
     GameState(Component name, Component[] lines) {
         this.name = name;
         this.lines = lines;
-    }
-
-    public Component getName() {
-        return name;
-    }
-
-    public Component[] getLines() {
-        return lines;
     }
 }

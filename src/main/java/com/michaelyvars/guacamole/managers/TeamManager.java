@@ -1,6 +1,7 @@
-package com.michaelyvars.guacamole.team;
+package com.michaelyvars.guacamole.managers;
 
 import com.michaelyvars.guacamole.Guacamole;
+import com.michaelyvars.guacamole.data.TeamData;
 import lombok.Getter;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;

@@ -1,7 +1,7 @@
 package com.michaelyvars.guacamole.data.expansions;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.player.PlayerData;
+import com.michaelyvars.guacamole.data.PlayerData;
 import io.github.miniplaceholders.api.Expansion;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.identity.Identity;
@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public record ExpansionPlayer(Guacamole plugin) {
 
     public Expansion get() {
-        Expansion.Builder builder = Expansion.builder("player");
+        Expansion.Builder builder = Expansion.builder("managers");
         builder.filter(Player.class);
 
         builder.audiencePlaceholder("name", (audience, argumentQueue, context) -> {

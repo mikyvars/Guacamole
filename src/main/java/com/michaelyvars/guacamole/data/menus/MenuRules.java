@@ -1,4 +1,4 @@
-package com.michaelyvars.guacamole.menu.types;
+package com.michaelyvars.guacamole.data.menus;
 
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.configuration.Configuration;

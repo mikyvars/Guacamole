@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.michaelyvars.guacamole.scoreboard.fastboard;
+package com.michaelyvars.guacamole.managers.fastboard;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -199,7 +199,7 @@ public abstract class FastBoardBase<T> {
      * @param player the owner of the scoreboard
      */
     protected FastBoardBase(Player player) {
-        this.player = Objects.requireNonNull(player, "player");
+        this.player = Objects.requireNonNull(player, "managers");
         this.id = "fb-" + Integer.toHexString(ThreadLocalRandom.current().nextInt());
 
         try {
@@ -371,9 +371,9 @@ public abstract class FastBoardBase<T> {
     }
 
     /**
-     * Get the player who has the scoreboard.
+     * Get the managers who has the scoreboard.
      *
-     * @return current player for this FastBoard
+     * @return current managers for this FastBoard
      */
     public Player getPlayer() {
         return this.player;
@@ -407,7 +407,7 @@ public abstract class FastBoardBase<T> {
     }
 
     /**
-     * Delete this FastBoard, and will remove the scoreboard for the associated player if he is online.
+     * Delete this FastBoard, and will remove the scoreboard for the associated managers if he is online.
      * After this, all uses of {@link #updateLines} and {@link #updateTitle} will throw an {@link IllegalStateException}
      *
      * @throws IllegalStateException if this was already call before

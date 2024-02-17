@@ -1,6 +1,7 @@
-package com.michaelyvars.guacamole.player;
+package com.michaelyvars.guacamole.managers;
 
 import com.michaelyvars.guacamole.Guacamole;
+import com.michaelyvars.guacamole.data.PlayerData;
 import lombok.Getter;
 import org.bukkit.event.Listener;
 

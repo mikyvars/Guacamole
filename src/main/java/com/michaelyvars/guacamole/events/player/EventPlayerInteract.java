@@ -1,9 +1,9 @@
 package com.michaelyvars.guacamole.events.player;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.game.GameState;
-import com.michaelyvars.guacamole.menu.types.MenuRules;
-import com.michaelyvars.guacamole.menu.types.MenuTeam;
+import com.michaelyvars.guacamole.data.GameState;
+import com.michaelyvars.guacamole.data.menus.MenuRules;
+import com.michaelyvars.guacamole.data.menus.MenuTeam;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -20,7 +20,7 @@ public class EventPlayerInteract implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (plugin.getGameManager().getGameState() == GameState.WAITING && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        if (plugin.getGameState() == GameState.WAITING && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (event.getItem() == null)
                 return;
 

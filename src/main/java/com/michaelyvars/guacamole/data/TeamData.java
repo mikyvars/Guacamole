@@ -1,6 +1,5 @@
-package com.michaelyvars.guacamole.team;
+package com.michaelyvars.guacamole.data;
 
-import com.michaelyvars.guacamole.player.PlayerData;
 import lombok.Data;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

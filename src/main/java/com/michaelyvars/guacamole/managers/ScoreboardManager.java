@@ -1,7 +1,7 @@
-package com.michaelyvars.guacamole.scoreboard;
+package com.michaelyvars.guacamole.managers;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.scoreboard.fastboard.FastBoard;
+import com.michaelyvars.guacamole.managers.fastboard.FastBoard;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -41,7 +41,7 @@ public class ScoreboardManager {
         scoreboards.put(player.getUniqueId(), fastBoard);
 
         player.getScheduler().runAtFixedRate(plugin, scheduledTask -> {
-            Component[] lines = plugin.getGameManager().getGameState().getLines().clone();
+            Component[] lines = plugin.getGameState().getLines().clone();
 
             for (int i = 0; i < lines.length; i++) {
                 lines[i] = MiniMessage.miniMessage().deserialize(((TextComponent) lines[i]).content(),

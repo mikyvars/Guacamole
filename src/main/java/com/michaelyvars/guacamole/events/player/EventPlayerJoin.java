@@ -1,10 +1,10 @@
 package com.michaelyvars.guacamole.events.player;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.game.GameState;
-import com.michaelyvars.guacamole.menu.types.MenuRules;
-import com.michaelyvars.guacamole.menu.types.MenuTeam;
-import com.michaelyvars.guacamole.player.PlayerData;
+import com.michaelyvars.guacamole.data.GameState;
+import com.michaelyvars.guacamole.data.PlayerData;
+import com.michaelyvars.guacamole.data.menus.MenuRules;
+import com.michaelyvars.guacamole.data.menus.MenuTeam;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.GameMode;
@@ -32,7 +32,7 @@ public class EventPlayerJoin implements Listener {
             plugin.getPlayerManager().getPlayers().put(player.getUniqueId(), playerData);
         }
 
-        if (plugin.getGameManager().getGameState() == GameState.WAITING) {
+        if (plugin.getGameState() == GameState.WAITING) {
 
             player.setHealth(20);
             player.setFoodLevel(20);

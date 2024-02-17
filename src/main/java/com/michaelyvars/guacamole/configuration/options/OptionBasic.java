@@ -28,19 +28,4 @@ public record OptionBasic<T>(String path, String[] description, T def) implement
             return configuration.get(path, def);
         }
     }
-
-    @Override
-    public void setValue(Json configuration, T value) {
-        if (def instanceof String) {
-            configuration.set(path, def);
-        } else if (def instanceof Integer) {
-            configuration.set(path, def);
-        } else if (def instanceof Double) {
-            configuration.set(path, def);
-        } else if (def instanceof Long) {
-            configuration.set(path, def);
-        } else if (def instanceof Boolean) {
-            configuration.set(path, def);
-        }
-    }
 }

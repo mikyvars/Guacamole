@@ -1,6 +1,5 @@
-package com.michaelyvars.guacamole.player;
+package com.michaelyvars.guacamole.data;
 
-import com.michaelyvars.guacamole.team.TeamData;
 import lombok.Data;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

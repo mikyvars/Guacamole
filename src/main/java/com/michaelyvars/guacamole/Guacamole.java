@@ -2,6 +2,7 @@ package com.michaelyvars.guacamole;
 
 import com.michaelyvars.guacamole.commands.CommandTeamName;
 import com.michaelyvars.guacamole.configuration.Configuration;
+import com.michaelyvars.guacamole.data.GameState;
 import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
 import com.michaelyvars.guacamole.data.expansions.ExpansionPlayer;
 import com.michaelyvars.guacamole.events.EventAsyncChat;
@@ -9,13 +10,11 @@ import com.michaelyvars.guacamole.events.EventFoodLevelChange;
 import com.michaelyvars.guacamole.events.EventInventoryClick;
 import com.michaelyvars.guacamole.events.EventServerListPing;
 import com.michaelyvars.guacamole.events.player.*;
-import com.michaelyvars.guacamole.game.GameManager;
-import com.michaelyvars.guacamole.menu.MenuItemProcessor;
-import com.michaelyvars.guacamole.player.PlayerManager;
-import com.michaelyvars.guacamole.scoreboard.ScoreboardManager;
-import com.michaelyvars.guacamole.team.TeamManager;
+import com.michaelyvars.guacamole.managers.PlayerManager;
+import com.michaelyvars.guacamole.managers.ScoreboardManager;
+import com.michaelyvars.guacamole.managers.TeamManager;
+import com.michaelyvars.guacamole.managers.WorldManager;
 import com.michaelyvars.guacamole.utils.CustomLogger;
-import com.michaelyvars.guacamole.world.WorldManager;
 import lombok.Getter;
 import me.mattstudios.mf.base.CommandManager;
 import net.kyori.adventure.text.Component;
@@ -31,8 +30,8 @@ public final class Guacamole extends JavaPlugin {
 
     private CustomLogger customLogger;
     private Configuration configuration;
+    private GameState gameState;
     private WorldManager worldManager;
-    private GameManager gameManager;
     private PlayerManager playerManager;
     private TeamManager teamManager;
     private ScoreboardManager scoreboardManager;
@@ -52,13 +51,12 @@ public final class Guacamole extends JavaPlugin {
             getCustomLogger().logInfo("(_______)(_______)|/     \\|(_______/|/     \\||/     \\|(_______)(_______/(_______/  ");
 
             this.configuration = new Configuration(this, getDataFolder().getPath());
+            this.gameState = GameState.WAITING;
             this.worldManager = new WorldManager(this);
-            this.gameManager = new GameManager(this);
             this.playerManager = new PlayerManager(this);
             this.teamManager = new TeamManager(this);
             this.scoreboardManager = new ScoreboardManager(this);
             this.odalitaMenus = OdalitaMenus.createInstance(this);
-            this.odalitaMenus.getProvidersContainer().setDefaultItemProvider(new MenuItemProcessor());
 
             new ExpansionGame(this).get().register();
             new ExpansionPlayer(this).get().register();

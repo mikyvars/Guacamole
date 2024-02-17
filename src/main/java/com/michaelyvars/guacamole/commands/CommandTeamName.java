@@ -1,8 +1,8 @@
 package com.michaelyvars.guacamole.commands;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.game.GameState;
-import com.michaelyvars.guacamole.player.PlayerData;
+import com.michaelyvars.guacamole.data.GameState;
+import com.michaelyvars.guacamole.data.PlayerData;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import me.mattstudios.mf.annotations.Command;
 import me.mattstudios.mf.annotations.Default;
@@ -28,7 +28,7 @@ public class CommandTeamName extends CommandBase {
     @Default
     @WrongUsage("&cUtilisation correcte: /teamname <nom>")
     public void defaultCommand(Player player, String name) {
-        if (plugin.getGameManager().getGameState() == GameState.WAITING) {
+        if (plugin.getGameState() == GameState.WAITING) {
             PlayerData playerData = plugin.getPlayerManager().getPlayers().get(player.getUniqueId());
 
             if (playerData == null)

@@ -1,7 +1,7 @@
 package com.michaelyvars.guacamole.events;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.game.GameState;
+import com.michaelyvars.guacamole.data.GameState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -17,7 +17,7 @@ public class EventFoodLevelChange implements Listener {
 
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
-        if (plugin.getGameManager().getGameState() != GameState.IN_GAME)
+        if (plugin.getGameState() != GameState.IN_GAME)
             event.setCancelled(true);
     }
 }

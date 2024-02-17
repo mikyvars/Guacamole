@@ -1,8 +1,8 @@
 package com.michaelyvars.guacamole.events;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.game.GameState;
-import com.michaelyvars.guacamole.player.PlayerData;
+import com.michaelyvars.guacamole.data.GameState;
+import com.michaelyvars.guacamole.data.PlayerData;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
@@ -28,7 +28,7 @@ public class EventAsyncChat implements Listener {
         PlayerData playerData = plugin.getPlayerManager().getPlayers().get(player.getUniqueId());
         TextComponent message = (TextComponent) event.message();
 
-        if (plugin.getGameManager().getGameState() == GameState.WAITING) {
+        if (plugin.getGameState() == GameState.WAITING) {
             plugin.getServer().broadcast(MiniMessage.miniMessage().deserialize("<player_name> <dark_gray>» <white><message>",
                     MiniPlaceholders.getAudiencePlaceholders(player),
                     Placeholder.component("message", message)));

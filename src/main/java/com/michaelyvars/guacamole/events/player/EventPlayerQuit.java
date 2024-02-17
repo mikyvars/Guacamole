@@ -1,8 +1,8 @@
 package com.michaelyvars.guacamole.events.player;
 
 import com.michaelyvars.guacamole.Guacamole;
-import com.michaelyvars.guacamole.game.GameState;
-import com.michaelyvars.guacamole.player.PlayerData;
+import com.michaelyvars.guacamole.data.GameState;
+import com.michaelyvars.guacamole.data.PlayerData;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
@@ -29,7 +29,7 @@ public class EventPlayerQuit implements Listener {
             return;
         }
 
-        if (plugin.getGameManager().getGameState() == GameState.WAITING) {
+        if (plugin.getGameState() == GameState.WAITING) {
 
             if (playerData.getTeam() != null) {
                 playerData.getTeam().getPlayers().remove(playerData);
