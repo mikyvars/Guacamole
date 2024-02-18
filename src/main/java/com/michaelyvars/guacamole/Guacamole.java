@@ -1,6 +1,7 @@
 package com.michaelyvars.guacamole;
 
-import com.michaelyvars.guacamole.commands.CommandTeamName;
+import com.michaelyvars.guacamole.commands.CommandGame;
+import com.michaelyvars.guacamole.commands.CommandTeam;
 import com.michaelyvars.guacamole.configuration.Configuration;
 import com.michaelyvars.guacamole.data.GameState;
 import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
@@ -80,7 +81,7 @@ public final class Guacamole extends JavaPlugin {
             pluginManager.registerEvents(new EventServerListPing(), this);
 
             CommandManager commandManager = new CommandManager(this);
-            commandManager.register(new CommandTeamName(this));
+            commandManager.register(new CommandTeam(this), new CommandGame(this));
             commandManager.getMessageHandler().register("cmd.no.permission", sender -> sender.sendMessage("§cTu n'as pas la permission d'utiliser cette commande."));
             commandManager.getMessageHandler().register("cmd.no.console", sender -> sender.sendMessage("§cTu ne peux pas utiliser cette commande depuis la console."));
             commandManager.getMessageHandler().register("cmd.no.exists", sender -> sender.sendMessage("§cCette commande n'existe pas."));
