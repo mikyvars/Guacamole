@@ -50,7 +50,7 @@ public class GamePreStartThread extends BukkitRunnable {
 
             cancel();
         } else {
-            plugin.getServer().broadcast(MiniMessage.miniMessage().deserialize("<game_prefix>Lancement dans <game_time-starting> seconde(s)",
+            plugin.getServer().broadcast(MiniMessage.miniMessage().deserialize("<game_prefix>Lancement dans <game_time:starting> seconde(s)",
                     MiniPlaceholders.getGlobalPlaceholders()));
         }
 

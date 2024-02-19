@@ -15,18 +15,16 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 @Menu(title = "&2Règles")
-public class MenuRules implements GlobalMenuProvider {
+public class RulesMenu implements GlobalMenuProvider {
 
     private final Guacamole plugin;
 
-    public MenuRules(Guacamole plugin) {
+    public RulesMenu(Guacamole plugin) {
         this.plugin = plugin;
     }
 

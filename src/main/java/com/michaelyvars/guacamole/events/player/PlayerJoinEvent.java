@@ -3,27 +3,26 @@ package com.michaelyvars.guacamole.events.player;
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.data.GameState;
 import com.michaelyvars.guacamole.data.PlayerData;
-import com.michaelyvars.guacamole.data.menus.MenuRules;
-import com.michaelyvars.guacamole.data.menus.MenuTeam;
+import com.michaelyvars.guacamole.data.menus.RulesMenu;
+import com.michaelyvars.guacamole.data.menus.TeamMenu;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class EventPlayerJoin implements Listener {
+public class PlayerJoinEvent implements Listener {
 
     private final Guacamole plugin;
 
-    public EventPlayerJoin(@NotNull Guacamole plugin) {
+    public PlayerJoinEvent(@NotNull Guacamole plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerManager().getPlayers().get(player.getUniqueId());
 
@@ -41,8 +40,8 @@ public class EventPlayerJoin implements Listener {
 
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
-            player.getInventory().setItem(3, MenuTeam.getItem());
-            player.getInventory().setItem(5, MenuRules.getItem());
+            player.getInventory().setItem(3, TeamMenu.getItem());
+            player.getInventory().setItem(5, RulesMenu.getItem());
 
             if (plugin.getWorldManager().getLobby() == null)
                 return;

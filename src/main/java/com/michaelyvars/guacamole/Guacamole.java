@@ -1,17 +1,17 @@
 package com.michaelyvars.guacamole;
 
-import com.michaelyvars.guacamole.commands.CommandGame;
-import com.michaelyvars.guacamole.commands.CommandTeam;
+import com.michaelyvars.guacamole.commands.GameCommand;
+import com.michaelyvars.guacamole.commands.TeamCommand;
 import com.michaelyvars.guacamole.configuration.Configuration;
 import com.michaelyvars.guacamole.data.GameState;
-import com.michaelyvars.guacamole.data.expansions.ExpansionGame;
-import com.michaelyvars.guacamole.data.expansions.ExpansionPlayer;
+import com.michaelyvars.guacamole.data.expansions.GameExpansion;
+import com.michaelyvars.guacamole.data.expansions.PlayerExpansion;
 import com.michaelyvars.guacamole.data.threads.GamePreStartThread;
 import com.michaelyvars.guacamole.data.threads.GameThread;
-import com.michaelyvars.guacamole.events.EventAsyncChat;
-import com.michaelyvars.guacamole.events.EventFoodLevelChange;
-import com.michaelyvars.guacamole.events.EventInventoryClick;
-import com.michaelyvars.guacamole.events.EventServerListPing;
+import com.michaelyvars.guacamole.events.AsyncChatEvent;
+import com.michaelyvars.guacamole.events.FoodLevelChangeEvent;
+import com.michaelyvars.guacamole.events.InventoryClickEvent;
+import com.michaelyvars.guacamole.events.ServerListPingEvent;
 import com.michaelyvars.guacamole.events.player.*;
 import com.michaelyvars.guacamole.managers.PlayerManager;
 import com.michaelyvars.guacamole.managers.ScoreboardManager;
@@ -66,22 +66,22 @@ public final class Guacamole extends JavaPlugin {
             this.gamePreStartThread = new GamePreStartThread(this);
             this.gameThread = new GameThread(this);
 
-            new ExpansionGame(this).get().register();
-            new ExpansionPlayer(this).get().register();
+            new GameExpansion(this).get().register();
+            new PlayerExpansion(this).get().register();
 
             PluginManager pluginManager = getServer().getPluginManager();
-            pluginManager.registerEvents(new EventPlayerAdvancementDone(), this);
-            pluginManager.registerEvents(new EventPlayerDropItem(this), this);
-            pluginManager.registerEvents(new EventPlayerInteract(this), this);
-            pluginManager.registerEvents(new EventPlayerJoin(this), this);
-            pluginManager.registerEvents(new EventPlayerQuit(this), this);
-            pluginManager.registerEvents(new EventAsyncChat(this), this);
-            pluginManager.registerEvents(new EventFoodLevelChange(this), this);
-            pluginManager.registerEvents(new EventInventoryClick(this), this);
-            pluginManager.registerEvents(new EventServerListPing(), this);
+            pluginManager.registerEvents(new PlayerAdvancementDoneEvent(), this);
+            pluginManager.registerEvents(new PlayerDropItemEvent(this), this);
+            pluginManager.registerEvents(new PlayerInteractEvent(this), this);
+            pluginManager.registerEvents(new PlayerJoinEvent(this), this);
+            pluginManager.registerEvents(new PlayerQuitEvent(this), this);
+            pluginManager.registerEvents(new AsyncChatEvent(this), this);
+            pluginManager.registerEvents(new FoodLevelChangeEvent(this), this);
+            pluginManager.registerEvents(new InventoryClickEvent(this), this);
+            pluginManager.registerEvents(new ServerListPingEvent(), this);
 
             CommandManager commandManager = new CommandManager(this);
-            commandManager.register(new CommandTeam(this), new CommandGame(this));
+            commandManager.register(new TeamCommand(this), new GameCommand(this));
             commandManager.getMessageHandler().register("cmd.no.permission", sender -> sender.sendMessage("§cTu n'as pas la permission d'utiliser cette commande."));
             commandManager.getMessageHandler().register("cmd.no.console", sender -> sender.sendMessage("§cTu ne peux pas utiliser cette commande depuis la console."));
             commandManager.getMessageHandler().register("cmd.no.exists", sender -> sender.sendMessage("§cCette commande n'existe pas."));

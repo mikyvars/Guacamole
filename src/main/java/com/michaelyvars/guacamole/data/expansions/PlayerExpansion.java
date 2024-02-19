@@ -10,7 +10,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import org.bukkit.entity.Player;
 
-public record ExpansionPlayer(Guacamole plugin) {
+public record PlayerExpansion(Guacamole plugin) {
 
     public Expansion get() {
         Expansion.Builder builder = Expansion.builder("player");

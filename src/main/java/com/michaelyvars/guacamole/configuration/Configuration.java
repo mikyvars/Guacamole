@@ -35,7 +35,10 @@ public class Configuration {
     public Configuration(Guacamole plugin, String path) {
         this.plugin = plugin;
         this.configurationFile = new Json("configuration", path);
+        reloadConfiguration();
+    }
 
+    public void reloadConfiguration() {
         for(Option<?> option : getOptions())
             option.getValue(configurationFile);
     }

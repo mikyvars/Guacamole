@@ -13,15 +13,14 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 @Command("teamname")
 @SuppressWarnings("unused")
-public class CommandTeamName extends CommandBase {
+public class TeamCommand extends CommandBase {
 
     private final Guacamole plugin;
 
-    public CommandTeamName(@NotNull Guacamole plugin) {
+    public TeamCommand(Guacamole plugin) {
         this.plugin = plugin;
     }
 

@@ -1,9 +1,11 @@
 package com.michaelyvars.guacamole.managers;
 
 import com.michaelyvars.guacamole.Guacamole;
+import com.michaelyvars.guacamole.configuration.Configuration;
 import lombok.Getter;
 import org.bukkit.GameRule;
 import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.WorldCreator;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,6 +20,7 @@ public class WorldManager {
     private World lobby;
     private World world;
     private World worldNether;
+    private WorldBorder worldBorder;
 
     public WorldManager(Guacamole plugin) {
         this.plugin = plugin;
@@ -36,6 +39,9 @@ public class WorldManager {
                     world.setStorm(false);
                     world.setThundering(false);
                     world.setTime(6000);
+                    worldBorder = world.getWorldBorder();
+                    worldBorder.setCenter(0, 0);
+                    worldBorder.setSize(plugin.getConfiguration().get(Configuration.BORDER_START));
                 }
                 case "world_lobby" -> {
                     lobby = targetWorld;
@@ -50,7 +56,7 @@ public class WorldManager {
                 case "world_nether" -> worldNether = targetWorld;
             }
 
-            plugin.getCustomLogger().logInfo("[" + targetWorld.getName() + "] has been successfully loaded.");
+            plugin.getCustomLogger().logInfo("Loaded world [" + targetWorld.getName() + "]");
         });
     }
 }

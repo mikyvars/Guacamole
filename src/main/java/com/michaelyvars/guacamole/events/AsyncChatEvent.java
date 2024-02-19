@@ -4,7 +4,6 @@ import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.data.GameState;
 import com.michaelyvars.guacamole.data.PlayerData;
 import io.github.miniplaceholders.api.MiniPlaceholders;
-import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -14,16 +13,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
-public class EventAsyncChat implements Listener {
+public class AsyncChatEvent implements Listener {
 
     private final Guacamole plugin;
 
-    public EventAsyncChat(@NotNull Guacamole plugin) {
+    public AsyncChatEvent(@NotNull Guacamole plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onAsyncChat(AsyncChatEvent event) {
+    public void onAsyncChat(io.papermc.paper.event.player.AsyncChatEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerManager().getPlayers().get(player.getUniqueId());
         TextComponent message = (TextComponent) event.message();

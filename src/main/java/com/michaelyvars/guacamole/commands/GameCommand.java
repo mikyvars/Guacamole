@@ -2,15 +2,13 @@ package com.michaelyvars.guacamole.commands;
 
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.data.GameState;
-import com.michaelyvars.guacamole.data.menus.MenuRules;
-import com.michaelyvars.guacamole.data.menus.MenuTeam;
+import com.michaelyvars.guacamole.data.menus.RulesMenu;
+import com.michaelyvars.guacamole.data.menus.TeamMenu;
 import com.michaelyvars.guacamole.data.threads.GamePreStartThread;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import me.mattstudios.mf.annotations.*;
 import me.mattstudios.mf.base.CommandBase;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,11 +20,11 @@ import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 @Command("game")
 @SuppressWarnings("unused")
-public class CommandGame extends CommandBase {
+public class GameCommand extends CommandBase {
 
     private final Guacamole plugin;
 
-    public CommandGame(Guacamole plugin) {
+    public GameCommand(Guacamole plugin) {
         this.plugin = plugin;
     }
 
@@ -97,8 +95,8 @@ public class CommandGame extends CommandBase {
 
                 player.setGameMode(GameMode.ADVENTURE);
                 player.getInventory().setHeldItemSlot(4);
-                player.getInventory().setItem(3, MenuTeam.getItem());
-                player.getInventory().setItem(5, MenuRules.getItem());
+                player.getInventory().setItem(3, TeamMenu.getItem());
+                player.getInventory().setItem(5, RulesMenu.getItem());
             });
 
             return;
@@ -112,6 +110,9 @@ public class CommandGame extends CommandBase {
         commandSender.sendMessage(miniMessage().deserialize("<game_prefix:error>La partie est déjà en cours.", MiniPlaceholders.getGlobalPlaceholders()));
     }
 
+    //TODO add freeze entities and invincibility + 3s on pause
+    // fix title clignote
+    // fix stats scoreboard
     @SubCommand("pause")
     @Permission("minecraft.command.op")
     public void pause(CommandSender commandSender) {

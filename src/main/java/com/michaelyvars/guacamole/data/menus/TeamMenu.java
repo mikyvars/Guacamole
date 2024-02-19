@@ -22,11 +22,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.stream.Collectors;
 
 @Menu(title = "&2Choisir une équipe")
-public final class MenuTeam implements PlayerMenuProvider {
+public final class TeamMenu implements PlayerMenuProvider {
 
     private final Guacamole plugin;
 
-    public MenuTeam(Guacamole plugin) {
+    public TeamMenu(Guacamole plugin) {
         this.plugin = plugin;
     }
 

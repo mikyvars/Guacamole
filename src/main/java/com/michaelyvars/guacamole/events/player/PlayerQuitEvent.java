@@ -8,19 +8,18 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class EventPlayerQuit implements Listener {
+public class PlayerQuitEvent implements Listener {
 
     private final Guacamole plugin;
 
-    public EventPlayerQuit(@NotNull Guacamole plugin) {
+    public PlayerQuitEvent(@NotNull Guacamole plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public void onPlayerQuit(org.bukkit.event.player.PlayerQuitEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerManager().getPlayers().get(player.getUniqueId());
 

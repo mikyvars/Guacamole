@@ -3,13 +3,12 @@ package com.michaelyvars.guacamole.managers;
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.data.TeamData;
 import lombok.Getter;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -19,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Getter
-public class TeamManager implements Listener {
+public class TeamManager {
 
     private final Guacamole plugin;
     private final List<TeamData> teams;
@@ -47,12 +46,21 @@ public class TeamManager implements Listener {
                 new TeamData("White_2", NamedTextColor.WHITE, Material.WHITE_WOOL)
         );
 
+        LinkedList<Location> spawnPoints = generateSpawnPoints(plugin.getWorldManager().getWorld(), teams.size(), (plugin.getWorldManager().getWorldBorder().getSize() / 2) - 250);
         Scoreboard scoreboard = plugin.getServer().getScoreboardManager().getMainScoreboard();
         scoreboard.getTeams().forEach(Team::unregister);
 
         teams.forEach(teamData -> {
             Team bukkitTeam = scoreboard.registerNewTeam(teamData.getUniqueId().toString());
             bukkitTeam.color(teamData.getColor());
+
+            Location spawnPoint = spawnPoints.poll();
+            teamData.setSpawn(spawnPoint);
+
+            if (spawnPoint == null)
+                plugin.getCustomLogger().logError("There are not enough spawn points for all teams");
+            else
+                plugin.getCustomLogger().logInfo("Created team [" + ((TextComponent) teamData.getName()).content() + "] [" + spawnPoint.getX() + ", " + spawnPoint.getY() + ", " + spawnPoint.getZ() + "]");
         });
     }
 
@@ -89,19 +97,11 @@ public class TeamManager implements Listener {
             Location location = new Location(world, x, y + 1.0, z);
             spawnPoints.add(location);
 
-            for (int k = -2; i < 2; i++)
+            for (int k = -2; k < 2; k++)
                 for (int l = -2; l < 2; l++)
                     world.getBlockAt(k, (int) y, l).setType(Material.BEDROCK);
         }
 
         return spawnPoints;
-    }
-
-    @EventHandler
-    public void onWorldInit(WorldInitEvent event) {
-        if (event.getWorld().getName().equalsIgnoreCase("world")) {
-            LinkedList<Location> spawnPoints = generateSpawnPoints(event.getWorld(), teams.size(), event.getWorld().getWorldBorder().getSize() - 250);
-            teams.forEach(teamData -> teamData.setSpawn(spawnPoints.poll()));
-        }
     }
 }

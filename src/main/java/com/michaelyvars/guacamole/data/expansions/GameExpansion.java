@@ -9,7 +9,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 
-public record ExpansionGame(Guacamole plugin) {
+public record GameExpansion(Guacamole plugin) {
 
     public Expansion get() {
         Expansion.Builder builder = Expansion.builder("game");
@@ -27,6 +27,9 @@ public record ExpansionGame(Guacamole plugin) {
                     }
                     case "dead" -> {
                         return Tag.inserting(plugin.prefix(Component.text("Spectateur", NamedTextColor.DARK_GRAY)));
+                    }
+                    case "error" -> {
+                        return Tag.inserting(plugin.prefix(Component.text("Erreur", NamedTextColor.RED)));
                     }
                     default -> {
                         return TagsUtils.EMPTY_TAG;

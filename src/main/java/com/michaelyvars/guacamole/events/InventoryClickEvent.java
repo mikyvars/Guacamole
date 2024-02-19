@@ -1,22 +1,21 @@
-package com.michaelyvars.guacamole.events.player;
+package com.michaelyvars.guacamole.events;
 
 import com.michaelyvars.guacamole.Guacamole;
 import com.michaelyvars.guacamole.data.GameState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class EventPlayerDropItem implements Listener {
+public class InventoryClickEvent implements Listener {
 
     private final Guacamole plugin;
 
-    public EventPlayerDropItem(@NotNull Guacamole plugin) {
+    public InventoryClickEvent(@NotNull Guacamole plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerDropItem(PlayerDropItemEvent event) {
+    public void onInventoryClick(org.bukkit.event.inventory.InventoryClickEvent event) {
         if (plugin.getGameState() != GameState.IN_GAME)
             event.setCancelled(true);
     }

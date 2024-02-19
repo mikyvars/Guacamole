@@ -42,7 +42,7 @@ public class GameThread extends BukkitRunnable {
                         player.showTitle(Title.title(Component.text("Début de l'épisode"), Component.text(String.valueOf(episode), NamedTextColor.GREEN)));
                 });
 
-                plugin.getServer().broadcast(MiniMessage.miniMessage().deserialize("<game_prefix>Début de l'épisode <green><game_time-episode><white>.",
+                plugin.getServer().broadcast(MiniMessage.miniMessage().deserialize("<game_prefix>Début de l'épisode <green><game_time:episode><white>.",
                         MiniPlaceholders.getGlobalPlaceholders()));
             }
 
